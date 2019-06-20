@@ -37,20 +37,38 @@ menu.startState({
 
 menu.state("init", {
   run: () => {
-    menu.my_state = {hello: "Hello World"}
+    console.log("__INIT__");
   },
 
   defaultNext: "markets"
 })
 
+const fetchMarkets = (phoneNumber, session, text) => {
+  const market = "Bujumbaru";
+  console.log("FETCH P#: ", phoneNumber);
+  console.log("FETCH SESH: ", session);
+  console.log("FETCH TEXT: ", text);
+  return db("products")
+    .where({ market: market })
+}
+
 menu.state("markets", {
 
   run: () => {
-    console.log("__INSIDE MARKETS__");
-    console.log("PRE_HELLO: ", menu.my_state.hello);
-    menu.my_state.hello = "HELLO MANGO?!";
-    console.log("POST_OPTIONS");
-    menu.con(menu.my_state.hello);
+    fetchMarkets(menu.args.phoneNumber, menu.args.sessionId, menu.args.text)
+      .then(res => {
+        console.log("DB RES: ", res);
+        if(res.length > 0) {
+          const options = "";
+          for(let i = 0; i < res.length; i++){
+            options += `\n${i+1}: ${res[i].product}`
+          }
+          menu.con(`Fetched ${res.length} items from db${options}`)
+        }
+      })
+      .catch(err => {
+        menu.con("We were not able to find any products")
+      })
   },
 
   defaultNext: "done"
@@ -77,8 +95,8 @@ menu.state("done", {
 //   next: () => {
 //     const market = "Bujumbaru";
     
-//     db("products")
-//       .where({ market: market })
+    // db("products")
+    //   .where({ market: market })
 //       .then(products => {
 //         const options = {};
 //         // console.log("DBPRODUCTS", products)
