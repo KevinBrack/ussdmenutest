@@ -59,7 +59,7 @@ menu.state("markets", {
       .then(res => {
         console.log("DB RES: ", res);
         if(res.length > 0) {
-          const options = "";
+          let options = "";
           for(let i = 0; i < res.length; i++){
             options += `\n${i+1}: ${res[i].product}`
           }
