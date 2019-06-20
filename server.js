@@ -35,15 +35,22 @@ menu.startState({
   }
 });
 
+menu.state("init", {
+  run: () => {
+    menu.my_state = {hello: "Hello World"}
+  },
+
+  defaultNext: "markets"
+})
+
 menu.state("markets", {
-  options: [],
 
   run: () => {
     console.log("__INSIDE MARKETS__");
-    console.log("PRE_OPTIONS: ", this.options);
-    this.options.push("Test One");
+    console.log("PRE_HELLO: ", menu.my_state.hello);
+    menu.my_state.hello = "HELLO MANGO?!";
     console.log("POST_OPTIONS");
-    menu.con(`${this.options[0]}`)
+    menu.con(menu.my_state.hello);
   },
 
   defaultNext: "done"
