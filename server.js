@@ -35,14 +35,6 @@ menu.startState({
   }
 });
 
-menu.state("init", {
-  run: () => {
-    console.log("__INIT__");
-  },
-
-  defaultNext: "markets"
-})
-
 const fetchMarkets = (phoneNumber, session, text) => {
   const market = "Bujumbaru";
   console.log("FETCH P#: ", phoneNumber);
@@ -61,9 +53,11 @@ menu.state("markets", {
         if(res.length > 0) {
           let options = "";
           for(let i = 0; i < res.length; i++){
-            options += `\n${i+1}: ${res[i].product} ${res[i].price}`
+            options += `\n#${res[i].id}: ${res[i].product} $${res[i].price}`
           }
           menu.con(`Fetched ${res.length} items from db${options}`)
+        } else {
+          menu.con("Found no products in that market that match your selection")
         }
       })
       .catch(err => {
