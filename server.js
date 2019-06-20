@@ -1,7 +1,7 @@
 const app = require("express")();
 const bodyParser = require("body-parser");
 const db = require("./data/dbConfig");
-const menu = require("./buyer.js");
+const { menu } = require("./buyer.js");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

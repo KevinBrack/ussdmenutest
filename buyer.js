@@ -154,20 +154,6 @@ menu.state("addCountry", {
 //   //     });
 // });
 
-app.post('*', (req, res) => {
-  let args = {
-      phoneNumber: req.body.phoneNumber,
-      sessionId: req.body.sessionId,
-      serviceCode: req.body.serviceCode,
-      text: req.body.text
-  };
-  menu.run(args, resMsg => {
-      console.log("PHONE: ", args.phoneNumber);
-      console.log("SESSION: ", args.sessionId);
-      console.log("SERVICE CODE: ", args.serviceCode);
-      console.log("TEXT: ", args.text);
-      res.send(resMsg);
-  });
-})
 
-export default menu;
+
+module.exports = menu;
