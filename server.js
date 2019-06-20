@@ -67,7 +67,7 @@ menu.state("markets", {
 
   next: {"0": "start"},
 
-  defaultNext: "product"
+  defaultNext: "done"
 })
 
 menu.state("product", {
@@ -78,9 +78,9 @@ menu.state("product", {
     // menu.args.text.split("*")
 
     // sets a key/value that can be used anywhere else in the application
-    menu.session.set({"product_id": menu.args.text.split("*")})
+    // menu.session.set({"product_id": menu.args.text.split("*")})
     // retreives the value for the key stored for the session
-    menu.session.get("product_id")
+    // menu.session.get("product_id")
   }
 })
 
