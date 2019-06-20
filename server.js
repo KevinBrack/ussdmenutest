@@ -174,7 +174,7 @@ menu.state("addCountry", {
 //   //     });
 // });
 
-app.post('*', (req, res) => {
+app.post('/ussd', (req, res) => {
   let args = {
       phoneNumber: req.body.phoneNumber,
       sessionId: req.body.sessionId,
