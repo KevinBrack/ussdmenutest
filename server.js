@@ -61,7 +61,7 @@ menu.state("markets", {
         if(res.length > 0) {
           let options = "";
           for(let i = 0; i < res.length; i++){
-            options += `\n${i+1}: ${res[i].product}`
+            options += `\n${i+1}: ${res[i].product} ${res[i].price}`
           }
           menu.con(`Fetched ${res.length} items from db${options}`)
         }
