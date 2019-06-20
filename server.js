@@ -103,19 +103,35 @@ menu.state("addCountry", {
 
 // Registering USSD handler with Express
 
-app.post("*", function(req, res) {
-  menu.run(req.body, ussdResult => {
-    res.send(ussdResult);
+// app.post("*", function(req, res) {
+//   menu.run(req.body, ussdResult => {
+//     res.send(ussdResult);
+//   });
+//   //   let post = req.body;
+//   //   addPost(post)
+//   //     .then(saved => {
+//   //       res.status(201).json(saved);
+//   //     })
+//   //     .catch(({ message }) => {
+//   //       res.status(503).json({ message });
+//   //     });
+// });
+
+app.post('*', (req, res) => {
+  let args = {
+      phoneNumber: req.body.phoneNumber,
+      sessionId: req.body.sessionId,
+      serviceCode: req.body.serviceCode,
+      text: req.body.text
+  };
+  menu.run(args, resMsg => {
+      console.log("PHONE: ", args.phoneNumber);
+      console.log("SESSION: ", args.sessionId);
+      console.log("SERVICE CODE: ", args.serviceCode);
+      console.log("TEXT: ", args.text);
+      res.send(resMsg);
   });
-  //   let post = req.body;
-  //   addPost(post)
-  //     .then(saved => {
-  //       res.status(201).json(saved);
-  //     })
-  //     .catch(({ message }) => {
-  //       res.status(503).json({ message });
-  //     });
-});
+})
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`\nAPI running on port ${port}\n`));
