@@ -67,7 +67,7 @@ menu.state("markets", {
         }
       })
       .catch(err => {
-        menu.con("We were not able to find any products")
+        menu.con(err);
       })
   },
 
