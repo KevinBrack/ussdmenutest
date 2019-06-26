@@ -84,10 +84,9 @@ menu.state("product", {
     // menu.session.set({"product_id": menu.args.text.split("*")})
     // retreives the value for the key stored for the session
     // menu.session.get("product_id")
-    sessionStorage[menu.args.sessionId].productId = menu.val;
+    sessionStore[menu.args.sessionId].productId = menu.val;
     console.log("SESSION STORAGE", sessionStore)
     menu.end(`You chose item with the id ${sessionStore[menu.args.sessionId].productId}`);
-    sessionStorage
   }
 })
 
