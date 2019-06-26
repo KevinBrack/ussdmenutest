@@ -21,12 +21,13 @@ app.get("/products", (req, res) => {
 
 const UssdMenu = require("ussd-menu-builder");
 let menu = new UssdMenu();
-sessionStore = {};
+const sessionStore = {};
 
 // Define menu states
 menu.startState({
   run: () => {
     sessionStore[menu.args.sessionId] = {}
+    console.log('NEW SESSION ', sessionStore)
     // use menu.con() to send response without terminating session
     menu.con("Welcome. Choose option:" + "\n1. Buyer" + "\n2. Seller");
   },
@@ -84,7 +85,9 @@ menu.state("product", {
     // retreives the value for the key stored for the session
     // menu.session.get("product_id")
     sessionStorage[menu.args.sessionId].productId = menu.val;
-    menu.end(`You chose item with the id ${sessionStorage[menu.args.sessionId].productId}`);
+    console.log("SESSION STORAGE", sessionStore)
+    menu.end(`You chose item with the id ${sessionStore[menu.args.sessionId].productId}`);
+    sessionStorage
   }
 })
 
